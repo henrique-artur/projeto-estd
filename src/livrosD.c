@@ -1,10 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "livrosD.h"
+#include "../include/livrosD.h"
 
-LivrosD* inserirLivros(LivrosD *l, int numero){
-  LivrosD* aux = (LivrosD*)malloc(sizeof(LivrosD));
-	// Em construção
+struct livrosd {
+	char titulo[50];
+	char autor[30];
+	char genero[20];
+	int codigo;
+	float preco;
+	int estoque;
+	char editora[15];
+  struct livrosd *prox;
+};
+
+struct livrosd2 {
+	int codigo;
+	int estoque;
+  struct livrosd2 *prox, *ant;
+};
+
+LivrosD* cadastrarLivros(LivrosD *l){
+  LivrosD *aux = (LivrosD*)malloc(sizeof(LivrosD));
+	
+	printf("Nome do livro: ");
+	fgets(aux->titulo, 50, stdin);
+	
+	printf("Nome do autor: ");
+	fgets(aux->autor, 30, stdin);
+	
+	printf("Nome do genero: ");
+	fgets(aux->genero, 20, stdin);
+	
+	printf("Nome da editora: ");
+	fgets(aux->editora, 15, stdin);
+
+	printf("Codigo do livro: ");
+	scanf("%d", &aux->codigo);
+
+	printf("Preco do livro: ");
+	scanf("%f", &aux->preco);
+	
+	printf("Estoque do livro: ");
+	scanf("%d", &aux->estoque);
+
+	setbuf(stdin, NULL);
+
+	aux->prox = l;
+
   return aux;
 }
 
