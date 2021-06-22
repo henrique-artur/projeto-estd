@@ -46,40 +46,46 @@ LivrosD* cadastrarLivros(LivrosD *l){
 	setbuf(stdin, NULL);
 
 	aux->prox = l;
-
+  
   return aux;
 }
 
-/*
-	l = NULL;
-	l = inserid(l, 10); 12 10 NULL
-	l = inserird(l, 12); 14 12 10
-	l = inserird(l, 14); 15 14 12
-	l = inserird(l, 15); NULL 15 14
-*/
+LivrosD* excluirLivros(LivrosD *l, int codigo) {
+	LivrosD *aux = l;
+  
+  while (aux != NULL) {
+    if (aux->codigo == codigo) {
+			printf("Codigo do livro excluido = %d", aux->codigo);
+			
+			free(aux);
+      
+      return 1;
+    }
+		else {
+			printf("Elemento não encontrado!");
+		}
+    
+    aux = aux->prox;
+  }
 
-void imprimirLivros(LivrosD *l){
+  return 0;
+}
+
+void imprimirLivros(LivrosD *l) {
   LivrosD *aux = l;
-	/*
-		char titulo[50];
-		char autor[30];
-		char genero[20];
-		int codigo;
-		float preco;
-		int estoque;
-		char editora[15];
-	*/
+	LivrosD2 *a = (LivrosD2*)malloc(sizeof(LivrosD2));
+	int counter = 1;
+
   while (aux != NULL){
-		int counter = 1;
 		printf("\n--------------------------------------\n");
 		printf("\nLivro %d\n", counter);
     printf("Titulo = %s\n", aux->titulo);
 		printf("Autor = %s\n", aux->autor);
 		printf("Genero = %s\n", aux->genero);
-		printf("Codigo = %d\n", aux->codigo);
+		printf("Codigo = %d\n", a->codigo);
 		printf("Preco = %.2f\n", aux->preco);
 		printf("Editora = %s\n", aux->editora);
-		printf("\nEstoque do livro %d = %d\n", counter, aux->estoque);
+		printf("\nEstoque do livro %d = %d\n", counter, a->quantidade);
 		printf("\n--------------------------------------\n");
 		
 		counter++;
