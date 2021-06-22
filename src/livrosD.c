@@ -51,32 +51,46 @@ LivrosD* cadastrarLivros(LivrosD *l){
 }
 
 LivrosD* excluirLivros(LivrosD *l, int codigo) {
-	LivrosD *aux = l;
-  
-  while (aux != NULL) {
-    if (aux->codigo == codigo) {
-			printf("Codigo do livro excluido = %d", aux->codigo);
-			
-			free(aux);
-    }
-		else {
-			printf("Elemento não encontrado!");
-		}
-    
-    aux = aux->prox;
-  }
+	
 
-  return aux;
+	if(l == NULL) {
+		printf("Lista vazia\n");
+		return l;
+	} else {
+		LivrosD *aux = l;
+
+		if(l->codigo == codigo) {
+			printf("Valor foi encontrado\n");
+			return l->prox;
+		}
+
+		for (aux = l; aux->prox != NULL; aux = aux->prox) {
+    	if ((aux->prox)->codigo == codigo) {
+				printf("Codigo do livro excluido = %d\n", (aux->prox)->codigo);
+			
+				LivrosD *local;
+				local = (aux->prox)->prox;
+				aux->prox = local;
+				
+				return l;
+    	}
+  	}
+
+		printf("Elemento não encontrado!\n");
+
+  	return l;
+	}
+
+	
 }
 
 void imprimirLivros(LivrosD *l) {
   LivrosD *aux = l;
-	LivrosD2 *a = (LivrosD2*)malloc(sizeof(LivrosD2));
 	int counter = 1;
 
   while (aux != NULL){
-		printf("\n--------------------------------------\n");
 		printf("\nLivro %d\n", counter);
+		printf("\n--------------------------------------\n");
     printf("Titulo = %s\n", aux->titulo);
 		printf("Autor = %s\n", aux->autor);
 		printf("Genero = %s\n", aux->genero);

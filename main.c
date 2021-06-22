@@ -5,6 +5,11 @@ int main(void) {
   LivrosD *iniciol = NULL;
 
   iniciol = cadastrarLivros(iniciol);
+  iniciol = cadastrarLivros(iniciol);
+
+  imprimirLivros(iniciol);
+
+  iniciol = excluirLivros(iniciol, 2);
 
   imprimirLivros(iniciol);
 
