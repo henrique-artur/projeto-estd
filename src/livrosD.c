@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "livrosD.h"
 
-LivrosD* inserirLivros(LivrosD *l, int numero){
+LivrosD* cadastrarLivros(LivrosD *l, int numero){
   LivrosD* aux = (LivrosD*)malloc(sizeof(LivrosD));
 	// Em construção
   return aux;
@@ -16,28 +16,30 @@ LivrosD* inserirLivros(LivrosD *l, int numero){
 	l = inserird(l, 15); NULL 15 14
 */
 
+LivrosD2* excluirLivros(LivrosD2 *l, LivrosD2 codigo) {
+	LivrosD2* aux = (LivrosD2*)malloc(sizeof(LivrosD2));
+	
+	// Procurar o elemento
+	// 
+}
+
+
+
 void imprimirLivros(LivrosD *l){
   LivrosD *aux = l;
-	/*
-		char titulo[50];
-		char autor[30];
-		char genero[20];
-		int codigo;
-		float preco;
-		int estoque;
-		char editora[15];
-	*/
+	LivrosD2 *a = (LivrosD2*)malloc(sizeof(LivrosD2));
+	int counter = 1;
+
   while (aux != NULL){
-		int counter = 1;
 		printf("\n--------------------------------------\n");
 		printf("\nLivro %d\n", counter);
     printf("Titulo = %s\n", aux->titulo);
 		printf("Autor = %s\n", aux->autor);
 		printf("Genero = %s\n", aux->genero);
-		printf("Codigo = %d\n", aux->codigo);
+		printf("Codigo = %d\n", a->codigo);
 		printf("Preco = %.2f\n", aux->preco);
 		printf("Editora = %s\n", aux->editora);
-		printf("\nEstoque do livro %d = %d\n", counter, aux->estoque);
+		printf("\nEstoque do livro %d = %d\n", counter, a->quantidade);
 		printf("\n--------------------------------------\n");
 		
 		counter++;
