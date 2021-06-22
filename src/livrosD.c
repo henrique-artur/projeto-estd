@@ -58,8 +58,6 @@ LivrosD* excluirLivros(LivrosD *l, int codigo) {
 			printf("Codigo do livro excluido = %d", aux->codigo);
 			
 			free(aux);
-      
-      return 1;
     }
 		else {
 			printf("Elemento não encontrado!");
@@ -68,7 +66,7 @@ LivrosD* excluirLivros(LivrosD *l, int codigo) {
     aux = aux->prox;
   }
 
-  return 0;
+  return aux;
 }
 
 void imprimirLivros(LivrosD *l) {
@@ -82,10 +80,10 @@ void imprimirLivros(LivrosD *l) {
     printf("Titulo = %s\n", aux->titulo);
 		printf("Autor = %s\n", aux->autor);
 		printf("Genero = %s\n", aux->genero);
-		printf("Codigo = %d\n", a->codigo);
+		printf("Codigo = %d\n", aux->codigo);
 		printf("Preco = %.2f\n", aux->preco);
 		printf("Editora = %s\n", aux->editora);
-		printf("\nEstoque do livro %d = %d\n", counter, a->quantidade);
+		printf("\nEstoque do livro %d = %d\n", counter, aux->estoque);
 		printf("\n--------------------------------------\n");
 		
 		counter++;
