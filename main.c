@@ -5,7 +5,8 @@
 
 int main() {
   LivrosD *iniciol = NULL;
-  int op, codigo;
+  LivrosD2 *iniciol2 = NULL;
+  int op, codigo, qtd;
 
   setlocale(LC_ALL,""); // Permite acentuações
 
@@ -16,6 +17,7 @@ int main() {
     printf("| 2 - Excluir um livro\n");
     printf("| 3 - Consultar livros\n");
     printf("| 4 - Comprar livros\n");
+    printf("| 5 - Limpar tela\n");
     printf("| 0 - Sair\n");
     scanf("%d", &op);
 
@@ -24,7 +26,7 @@ int main() {
         iniciol = cadastrarLivros(iniciol);
         break;
       case 2:
-        printf("Informe o código do produto: \n");
+        printf("Informe o código do produto: ");
         scanf("%d", &codigo);
         iniciol = excluirLivros(iniciol, codigo);
         break;
@@ -32,11 +34,26 @@ int main() {
         imprimirLivros(iniciol);
         break;
       case 4:
-        // iniciol = comprarLivros(iniciol);
+        printf("Informe o código do produto: ");
+        scanf("%d", &codigo);
+        printf("Informe a quantidade do pedido: ");
+        scanf("%d", &qtd);
+        if(temEstoque(iniciol, codigo, qtd)){
+          iniciol = comprarLivro(iniciol, iniciol2, codigo, qtd);
+        } else {
+          iniciol2 = foraDeEstoque(iniciol2, iniciol, codigo, qtd);
+          imprimirForaEstoque(iniciol2);
+        }
+        break;
+      case 5:
+        system("clear");
         break;
       case 0:
         printf("Obrigado pela preferência\n");
         printf("Compras finalizadas!\n");
+        break;
+      default : 
+        printf("Opcao invalida!\n");
         break;
     }
   } while (op != 0);

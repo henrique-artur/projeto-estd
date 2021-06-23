@@ -1,5 +1,6 @@
 {
   "files.associations": {
-    "livrosd.h": "c"
+    "livrosd.h": "c",
+    "sstream": "c"
   }
 }

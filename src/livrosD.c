@@ -15,7 +15,7 @@ struct livrosd {
 
 struct livrosd2 {
 	int codigo;
-	int estoque;
+	int quantidade;
   struct livrosd2 *prox, *ant;
 };
 
@@ -55,18 +55,16 @@ LivrosD* cadastrarLivros(LivrosD *l){
 }
 
 LivrosD* excluirLivros(LivrosD *l, int codigo) {
-	
-
 	if(l == NULL) {
 		printf("Lista vazia\n");
 		return l;
 	} else {
-		LivrosD *aux = l;
-
 		if(l->codigo == codigo) {
-			printf("Valor foi encontrado\n");
+			printf("Valor foi encontrado no inicio da lista\n");
 			return l->prox;
 		}
+
+		LivrosD *aux = l;
 
 		for (aux = l; aux->prox != NULL; aux = aux->prox) {
     	if ((aux->prox)->codigo == codigo) {
@@ -84,21 +82,19 @@ LivrosD* excluirLivros(LivrosD *l, int codigo) {
 
   	return l;
 	}
-
-	
 }
 
 void imprimirLivros(LivrosD *l) {
   LivrosD *aux = l;
 	int counter = 1;
 
-	if(l == NULL){
+	if (l == NULL){
 		printf("Lista vazia!\n");
 		return;
 	}
 
   while (aux != NULL){
-		printf("\nLivro %d\n", counter);
+		printf("\nLivro %d", counter);
 		printf("\n--------------------------------------\n");
     printf("Titulo = %s\n", aux->titulo);
 		printf("Autor = %s\n", aux->autor);
@@ -112,4 +108,107 @@ void imprimirLivros(LivrosD *l) {
 		counter++;
     aux = aux->prox;
   }
+}
+
+LivrosD* comprarLivro(LivrosD *l, LivrosD2 *l2, int codigo, int qtd) {
+	if (l == NULL){
+		printf("Não há livros no acervo!\n");
+		return l;
+	}
+	
+	LivrosD *aux = l;
+
+	while (aux != NULL){
+		if (aux->codigo == codigo){
+			aux->estoque -= qtd;
+			
+			printf("Valor da compra: %.2f\n", aux->preco*qtd);
+
+			return l;
+		}
+
+		aux = aux->prox;
+	}
+
+	printf("Livro nao encontrado\n");
+
+	return l;
+}
+
+LivrosD2* foraDeEstoque(LivrosD2 *l2, LivrosD *l, int codigo, int qtd){
+	LivrosD *aux = l;
+	
+	if(aux == NULL){
+		printf("Não há livros no acervo!\n");
+		return l2;
+	}
+	
+	int qtdForaEstoque = 0;
+	
+	while (aux != NULL) {
+		if (aux->codigo == codigo){
+			qtdForaEstoque = qtd - aux->estoque;
+			break;
+		}
+		aux = aux->prox;
+	}
+
+	while (l2 != NULL){
+		if (l2->codigo == codigo) {
+			l2->quantidade += qtdForaEstoque;
+			return l2;
+		}
+
+		l2 = l2->prox;
+	}
+
+	l2 = livroEsgotado(l2, codigo, qtdForaEstoque);
+
+	return l2;
+}
+
+LivrosD2* livroEsgotado(LivrosD2 *l2, int codigo, int qtd){
+	LivrosD2 *novo = (LivrosD2*)malloc(sizeof(LivrosD2));
+
+	novo->codigo = codigo;
+	novo->quantidade = qtd;
+	novo->prox = l2;
+	novo->ant = NULL;
+
+	if (l2 != NULL) 
+		l2->ant = novo;
+		
+	return novo;
+}
+
+int temEstoque(LivrosD *l, int codigo, int qtd){
+	LivrosD *aux = l;
+
+	while (aux != NULL){
+		if(aux->codigo == codigo) {
+			if(qtd > aux->estoque) 
+				return 0;
+			else 
+				return 1;
+		}
+
+		aux = aux->prox;
+	}
+}
+
+void imprimirForaEstoque(LivrosD2 *l2){
+	LivrosD2 *aux = l2;
+
+	if (aux == NULL) {
+		printf("Não há livros no acervo!\n");
+		return;
+	}
+	
+	printf("\nFora de estoque \n");
+	while (aux != NULL){
+		printf("Codigo: %d\n", aux->codigo);
+		printf("Quantidade: %d\n", aux->quantidade);
+
+		aux = aux->prox;
+	}
 }
