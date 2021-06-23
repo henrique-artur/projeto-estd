@@ -23,16 +23,20 @@ LivrosD* cadastrarLivros(LivrosD *l){
   LivrosD *aux = (LivrosD*)malloc(sizeof(LivrosD));
 	
 	printf("Nome do livro: ");
-	fgets(aux->titulo, 50, stdin);
+	scanf(" %[^\t\n]s", aux->titulo); // Lê a string com espaços e tabulações
+	setbuf(stdin, NULL);
 	
 	printf("Nome do autor: ");
-	fgets(aux->autor, 30, stdin);
-	
+	scanf(" %[^\t\n]s", aux->autor);
+	setbuf(stdin, NULL);
+
 	printf("Nome do genero: ");
-	fgets(aux->genero, 20, stdin);
-	
+	scanf(" %[^\t\n]s", aux->genero);
+	setbuf(stdin, NULL);
+
 	printf("Nome da editora: ");
-	fgets(aux->editora, 15, stdin);
+	scanf(" %[^\t\n]s", aux->editora);
+	setbuf(stdin, NULL);
 
 	printf("Codigo do livro: ");
 	scanf("%d", &aux->codigo);
@@ -43,9 +47,9 @@ LivrosD* cadastrarLivros(LivrosD *l){
 	printf("Estoque do livro: ");
 	scanf("%d", &aux->estoque);
 
-	setbuf(stdin, NULL);
-
 	aux->prox = l;
+
+	printf("\nLivro cadastrado com sucesso!\n");
   
   return aux;
 }
