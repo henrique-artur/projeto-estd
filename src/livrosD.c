@@ -92,6 +92,11 @@ void imprimirLivros(LivrosD *l) {
   LivrosD *aux = l;
 	int counter = 1;
 
+	if(l == NULL){
+		printf("Lista vazia!\n");
+		return;
+	}
+
   while (aux != NULL){
 		printf("\nLivro %d\n", counter);
 		printf("\n--------------------------------------\n");
