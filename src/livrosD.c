@@ -47,19 +47,45 @@ LivrosD* cadastrarLivros(LivrosD *l){
 	printf("Estoque do livro: ");
 	scanf("%d", &aux->estoque);
 
-	aux->prox = l;
+	LivrosD *aux2;
 
-	printf("\nLivro cadastrado com sucesso!\n");
-  
-  return aux;
+	aux2 = l;
+	// Ordenando os livros na lista
+	if (aux2 == NULL) {
+		aux->prox = aux2;
+
+		return aux;
+	}
+	else {
+		if (aux2->codigo > aux->codigo) {
+			aux->prox = aux2;
+
+			return aux;
+		}
+
+		while (aux2 != NULL) {
+			if ((aux2->prox)->codigo > aux->codigo) {
+				aux->prox = aux2->prox;
+				aux2->prox = aux;
+
+				return l;
+			}
+
+			aux2 = aux2->prox;
+		}
+
+		aux2->prox = aux;
+
+		return l;
+	}
 }
 
 LivrosD* excluirLivros(LivrosD *l, int codigo) {
-	if(l == NULL) {
+	if (l == NULL) {
 		printf("Lista vazia\n");
 		return l;
 	} else {
-		if(l->codigo == codigo) {
+		if (l->codigo == codigo) {
 			printf("Valor foi encontrado no inicio da lista\n");
 			return l->prox;
 		}
@@ -135,7 +161,7 @@ LivrosD* comprarLivro(LivrosD *l, LivrosD2 *l2, int codigo, int qtd) {
 	return l;
 }
 
-LivrosD2* foraDeEstoque(LivrosD2 *l2, LivrosD *l, int codigo, int qtd){
+LivrosD2* foraDeEstoque(LivrosD2 *l2, LivrosD *l, int codigo, int qtd) {
 	LivrosD *aux = l;
 	
 	if(aux == NULL){
@@ -146,7 +172,7 @@ LivrosD2* foraDeEstoque(LivrosD2 *l2, LivrosD *l, int codigo, int qtd){
 	int qtdForaEstoque = 0;
 	
 	while (aux != NULL) {
-		if (aux->codigo == codigo){
+		if (aux->codigo == codigo) {
 			qtdForaEstoque = qtd - aux->estoque;
 			break;
 		}
@@ -167,7 +193,7 @@ LivrosD2* foraDeEstoque(LivrosD2 *l2, LivrosD *l, int codigo, int qtd){
 	return l2;
 }
 
-LivrosD2* livroEsgotado(LivrosD2 *l2, int codigo, int qtd){
+LivrosD2* livroEsgotado(LivrosD2 *l2, int codigo, int qtd) {
 	LivrosD2 *novo = (LivrosD2*)malloc(sizeof(LivrosD2));
 
 	novo->codigo = codigo;
@@ -181,12 +207,12 @@ LivrosD2* livroEsgotado(LivrosD2 *l2, int codigo, int qtd){
 	return novo;
 }
 
-int temEstoque(LivrosD *l, int codigo, int qtd){
+int temEstoque(LivrosD *l, int codigo, int qtd) {
 	LivrosD *aux = l;
 
-	while (aux != NULL){
-		if(aux->codigo == codigo) {
-			if(qtd > aux->estoque) 
+	while (aux != NULL) {
+		if (aux->codigo == codigo) {
+			if (qtd > aux->estoque) 
 				return 0;
 			else 
 				return 1;
@@ -196,7 +222,7 @@ int temEstoque(LivrosD *l, int codigo, int qtd){
 	}
 }
 
-void imprimirForaEstoque(LivrosD2 *l2){
+void imprimirForaEstoque(LivrosD2 *l2) {
 	LivrosD2 *aux = l2;
 
 	if (aux == NULL) {
