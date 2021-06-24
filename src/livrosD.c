@@ -63,7 +63,7 @@ LivrosD* cadastrarLivros(LivrosD *l){
 			return aux;
 		}
 
-		while (aux2 != NULL) {
+		while (aux2->prox != NULL) {
 			if ((aux2->prox)->codigo > aux->codigo) {
 				aux->prox = aux2->prox;
 				aux2->prox = aux;
